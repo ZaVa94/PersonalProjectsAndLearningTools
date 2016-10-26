@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+input[type="number"] {
+width:50px; height:30px;
+text-align:center;
+margin:3px;
+float:left;}
+
+select, .equals {
+margin:3px;
+float:left;}
+
+output {
+display:block;
+border:1px solid #333333;
+border-radius:5px;
+min-width:25px; height:25px;
+margin:3px; padding:2px;
+text-align:center;
+background:#000000;
+color:#ffffff;
+float:left; }
+</style>
+<script type="text/javascript">
+function updateOutput() {
+	var form = document.getElementById("calc");
+	var outBMR = form.elements["BMR"];
+	var outBMI = form.elements["BMI"];
+	var weight = parseInt(form.elements["weight"].value);
+	var height = parseInt(form.elements["height"].value);
+	var age = parseInt(form.elements["age"].value);
+	var funcType = parseInt(form.elements["func"].value);
+	
+	switch(funcType){
+	case 0:
+		outBMR.value = (66+(13.7*(weight*.454))+(5*(height*2.54))-(6.8*age)).toFixed(0);
+		outBMI.value = "Nada Brah";
+		break;
+	case 1:
+		outBMR.value = "Nada Biznazz";
+		outBMI.value = ((weight*.454)/(Math.sqrt(height*2.54))).toFixed(2);
+		break;
+	default:
+		break;
+	}
+}
+</script>
+</head>
+<body>
+	
+	<form id="calc" oninput="updateOutput()">
+	<input name="weight" type="number" value="0" />
+	<input name="height" type="number" value="0" />
+	<input name="age" type="number" value="0" />
+	<select name="func" onchange="updateOutput()">
+		<option value="0">BMR</option>
+		<option value="1">BMI</option>
+	</select>
+	<div class="equals"> = </div>
+	<output name="BMR" for="weight age height">0</output>
+	<output name="BMI" for="weight height">0</output>
+	
+	
+	</form>
+
+</body>
+</html>
